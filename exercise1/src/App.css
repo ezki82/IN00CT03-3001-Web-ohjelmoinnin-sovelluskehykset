@@ -1,7 +1,8 @@
 body {
   font-family: helvetica, arial;
-  background-color: green;
+  background-color: rgb(233, 234, 237);
 }
+
 .Navbar {
   background-color: rgb(6, 26, 77);
   color: white;
@@ -30,6 +31,7 @@ body {
   background-color: #ffffff;
   border: none;
   border-radius: 25px;
+  margin-right: 40px;
   padding: 15px 32px;
   font-size: 16px;
   font-weight: bold;
@@ -40,19 +42,21 @@ body {
   background-color: transparent;
   color: #ffffff;
   border: none;
-  padding: 15px 15px;
+  padding: 15px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
+
 .Maincontainer {
   background-color: rgb(233, 234, 237);
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 0 auto;
   flex-direction: column;
   padding-left: 10%;
   padding-right: 10%;
 }
+
 .Subcontainer {
   background-color: rgb(233, 234, 237);
   display: flex;
@@ -63,45 +67,51 @@ body {
   padding-right: 10%;
   gap: 10px;
 }
+
 .Contentbar {
   background-color: rgb(79, 150, 165);
   margin-top: 5px;
   padding: 5px;
   padding-left: 50px;
 }
+
 .Contentbar-text {
   color: white;
   font-weight: bold;
 }
+
 .Smallnewscontainer {
   background-color: rgb(255,255,255);
   width: 30%;
   padding: 20px;
 }
+
 .Smallnews {
     display: flex;
     gap: 20px;
 }
+
 .Smallnews h1 {
   color: rgb(79, 150, 165);
   font-size: 35px;
   font-family: 'Times New Roman', Times, serif;
 }
+
 .Articlecontainer {
   background-color: rgb(255,255,255);
   padding: 20px;
   width: 100%;
 }
+
 .Article img {
   height: 200px;
 }
+
 .Ad {
   background-color: rgb(63, 185, 226);
 }
+
 .Box {
   height: 100px;
   width: 100px;
-}
-body {
-  background-color: rgb(233, 234, 237);
 }
