@@ -24,18 +24,22 @@ export const SmallnewsGroup = [
 
 export const ContentbarGroup = [
     {
+        id: 1,
         type: "News",
         text: "ULKOMAAT: Yhdysvallat jättänyt kirjallisen vastauksen Venäjän turvallisuusvaatimuksiin - Naton pääsihteerin tiedotustilaisuus suorana noin kello 20"
     },
-    {
+    {   
+        id:2,
         type: "News",
         text: "KORONATILANNE: Tehohoitoa vaativien korona­potilaiden määrässä on tapahtunut merkittävä käänne parempaan"
     },
     {
+        id:3,
         type: "News",
         text: "ELOKUVAT: Laajasti ihastellulle Hytti nro 6:lle tyrmäävä kritiikki The New Yorker -lehdessä – Toisen suuren lehden kriitikolta vastaavasti kehut"
     },
     {
+        id:4,
         type: "",
         text: "MAINOS: Tutustu Hesariin 2 viikkoa maksutta"
     }
@@ -43,24 +47,28 @@ export const ContentbarGroup = [
 
 export const ArticleGroup = [
     {
+        id:1,
         title: "Koronavirus",
         imgSrc: "/img/korona.png",
         alt: "korona",
         text: "Et eiko tama ei asia. Talvella saa voi talveksi kaantyen tuo. Rusinoita kenenkaan seitsemia tai mihinkaan laakariin kas. Jai ota ajaakos nuo nuorten lempean viinaan huoneen tulitte. Kayn en niin ei saat tein. Paaltapain hyvastinsa te ne hiljaisuus sinullekin.",
     },
     {
+        id:2,
         title: "Maailmanloppu",
         imgSrc: "/img/maailmanloppu.jpg",
         alt: "maailmanloppu",
         text: "Se et taskuun ukkikin enempaa kalassa. Ja oikeastaan lintukarit se tuommoinen tarkastaen huumauksen seuratessa. Peri sano jai kay vai osaa ihan. Ihan elaa puhe he mika ne sata. Toden et se ne heita on ettei. Teita loppu istui kas ilkea ostaa kay. Pera omaa toki voi ukko ole aani.",
     },
     {
+        id:3,
         title: "Zombiehyökkäys",
         imgSrc: "/img/zombieattack.png",
         alt: "zombie",
         text: "Riittaisi huumannut ai millainen ja pianaikaa. Totisesti mihinkaan toi eri tai jos ainaisena huumannut teistakin. Ja moisi siina en kaula joita. Ero tee ulos jaa enko mene. Ylpeammin ai jo juoksette maistanut ja ajaisivat. Maailman uskotaan me maailman ai poikansa toimitan se kutukala on. Voi kai porsas kaikin nakisi. Ukkovaari et tahtoisin no kerrankin kuunnella ai seitsemia he hiljainen. Olet vain vai toi alla ela.",
     },
     {
+        id:4,
         title: "Maankuori on revennyt",
         imgSrc: "/img/maankuori.jpg",
         alt: "maankuori",

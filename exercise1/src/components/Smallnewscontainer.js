@@ -6,7 +6,7 @@ const Smallnewscontainer = (props) => {
     <div className="Smallnewscontainer">
       <h2>Luetuimmat</h2>
       <hr/>
-        {props.SmallnewsGroup.map((s) => <Smallnews no={s.no} title={s.title} text={s.text}/>)}
+        {props.SmallnewsGroup.map((s) => <Smallnews key={s.no} no={s.no} title={s.title} text={s.text}/>)}
     </div>
   );
 };
