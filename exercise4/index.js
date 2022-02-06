@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = 3000;
 
-const products = [
+let products = [
     {
         id: 'a3b70433-b2c9-428d-8a03-061a780566c9',
         name: "product 1",
@@ -24,34 +24,63 @@ const products = [
     }
 ]
 
-/*
-API operations:
-    /products:
-        -POST: create new product (name, manufacturer, category, description, price, image)
-        -GET: get all products
-        -/:id GET: get single product
-        -/:id PUT: modify product
-        -GET: search product with name, manufacturer and/or category
-*/
+app.use(express.json()); // replaces body parser in express 4.16 and later
+
+const info = `
+<div>
+    API operations: <br/>
+    <br/>
+    /products:<br/>
+    -/ POST: create new product (name, manufacturer, category, description, price, image) -DONE-<br/>
+    -/ GET: get all products -DONE-<br/>
+    -/:id GET: get single product<br/>
+    -/:id PUT: modify product<br/>
+    -/ GET: search product with name, manufacturer and/or category
+</div>
+`
 app.get('/', (req, res) => {
-    res.send('API root');
+    res.send(info);
 })
 
 app.post('/products', (req, res) => {
-    res.send('create new product');
+    const newProduct = {
+        id: uuidv4(),
+        name: req.body.name,
+        manufacturer: req.body.manufacturer,
+        category: req.body.category,
+        description: req.body.description,
+        price: req.body.price,
+        imageUrl: req.body.imageUrl
+    };
+    products = products.concat(newProduct);
+    res.json(products.find(p => p.id === newProduct.id));
+})
+
+app.get('/products/:id', (req, res) => {
+    const searchedProduct = products.find(p => p.id === req.params.id);
+    if (searchedProduct) {
+        res.json(searchedProduct);
+    }
+    else {
+        res.status(400).send({ error: 'Product not found'});
+    }
 })
 
 app.get('/products', (req, res) => {
     res.json(products);
 })
 
-app.get('/products/:id', (req, res) => {
-    const foundIndex = -1;
-    res.send('get single product');
-})
-
 app.put('/products/:id', (req, res) => {
-    res.send('modify product');
+    const updateProduct = products.find(p => p.id === req.params.id);
+    if (updateProduct) {
+        console.log()
+        const updatedProduct = {...req.body, id: updateProduct.id}
+        products = products.map(p => p.id === updatedProduct.id ? updatedProduct : p);
+        res.json(updatedProduct);
+    }
+    else {
+        res.status(400).send({ error: 'Product not found'});
+    }
 })
 
 app.listen(port, () => {
