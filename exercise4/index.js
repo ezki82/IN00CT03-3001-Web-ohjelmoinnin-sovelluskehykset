@@ -275,6 +275,40 @@ let products = [
     }
     ]
 
+let users = [
+    {
+        id: "4f6e5w45e",
+        name: "John Smith",
+        address: "Lakeside 12 949494 Los Angeles",
+        phoneNumber: "1121-5565-565"
+    },
+    {
+        id: "54fe64fefe",
+        name: "Andrea Smith",
+        address: "Lakeside 12 949494 Los Angeles",
+        phoneNumber: "1121-5565-565"
+    },
+    {
+        id: "46f46f64e46e46",
+        name: "James Lake",
+        address: "Mount Hill 22 949494 San Francisco",
+        phoneNumber: "2214-8496-974"
+    }
+    
+]
+
+let invoices = [
+    {
+        id: "fe4w5f6e4w",
+        name: "Erska"
+    },
+    {
+        id: "f4e6w4g63",
+        name: "Jorma"
+    }
+
+]
+
 app.use(express.json()); // replaces body parser in express 4.16 and later
 
 const info = `
@@ -284,9 +318,21 @@ const info = `
     /products:<br/>
     -/ POST: create new product (name, manufacturer, category, description, price, image) -DONE-<br/>
     -/ GET: get all products -DONE-<br/>
-    -/:id GET: get single product<br/>
-    -/:id PUT: modify product<br/>
-    -/ GET: search product with name, manufacturer and/or category
+    -/:id GET: get single product -DONE-<br/>
+    -/:id PUT: modify product -DONE-<br/>
+    -?name=xxx&manufacturer=xxx&category=xxx GET: search product with name, manufacturer and category -DONE-<br/>
+    <br/>
+    /user:<br/>
+    -/ GET: get all users, <b>for testing only</b> -DONE- <br/>
+    -/ POST: create new user (name, address, phoneNumber) -DONE-<br/>
+    <br/>
+    /invoice:<br/>
+    -/ GET: get user invoices -DONE-<br/>
+    -/:id GET: get single invoice -DONE-<br/>
+    -/:id DELETE: delete single invoice -DONE-<br/>
+    <br/>
+    /purchase: <br/>
+    -/ POST: purchase product(s) for user. Makes invoice for user -DONE-<br/>
 </div>
 `
 
@@ -315,7 +361,6 @@ app.get('/products', (req, res) => {
     if (req.query.category) {
         searchProducts = searchProducts.filter(p => p.category.toLowerCase().includes(req.query.category.toLowerCase()));
     }
-    console.log(req.query);
     res.json(searchProducts);
 })
 
@@ -334,7 +379,7 @@ app.post('/products', (req, res) => {
 })
 
 app.put('/products/:id', (req, res) => {
-    const updateProduct = products.find(p => p.id === req.params.id);
+    const updateProduct = products.find(p => p.id.toString() === req.params.id);
     if (updateProduct) {
         console.log()
         const updatedProduct = {...req.body, id: updateProduct.id}
@@ -344,6 +389,70 @@ app.put('/products/:id', (req, res) => {
     else {
         res.status(400).send({ error: 'Product not found'});
     }
+})
+
+app.get('/user', (req, res) => {
+    res.json(users);
+})
+
+app.post('/user', (req, res) => {
+    const newUser = {
+        id: uuidv4(),
+        name: req.body.name,
+        address: req.body.address,
+        phoneNumber: req.body.phoneNumber
+    };
+    users = users.concat(newUser);
+    res.json(users.find(p => p.id === newUser.id));
+})
+
+app.get('/invoice', (req, res) => {
+    res.json(invoices);
+})
+
+app.get('/invoice/:id', (req, res) => {
+    const searchedInvoice = invoices.find(i => i.id === req.params.id);
+    if (searchedInvoice) {
+        res.json(searchedInvoice);
+    }
+    else {
+        res.status(400).send({ error: 'Invoice not found'});
+    }
+})
+
+app.delete('/invoice/:id', (req, res) => {
+    const deleteInvoice = invoices.find(i => i.id === req.params.id);
+    if (deleteInvoice) {
+        invoices = invoices.filter(i => i.id !== req.params.id)
+        res.json(deleteInvoice);
+    }
+    else {
+        res.status(400).send({ error: 'Invoice not found'});
+    }
+})
+
+app.post('/purchase', (req, res) => {
+    const purchaseUser = users.find(u => u.id === req.body.userid)
+    if (!purchaseUser) {
+        res.status(400).send({ error: 'User not found'});
+    }
+    let newInvoice = {
+        id: uuidv4(),
+        user: purchaseUser,
+        products: []
+    }
+    req.body.products.forEach(p => {
+        const newProduct = products.find(product => p.id === product.id.toString());
+        if (newProduct) {
+            newInvoice.products.push(newProduct);
+        }
+    });
+    if (newInvoice.products.length <= 0) {
+        res.status(400).send({ error: 'No products found for invoice'})
+    }
+    newInvoice.totalSum = newInvoice.products.reduce((sum, product) => sum + product.price, 0);
+    invoices = invoices.concat(newInvoice);
+    res.json(newInvoice);
 })
 
 app.listen(port, () => {
