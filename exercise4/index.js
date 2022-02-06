@@ -26,12 +26,12 @@ const products = [
 
 /*
 API operations:
-    -Products:
-        -create new product (name, manufacturer, category, description, price, image)
-        -get all products
-        -get single product
-        -modify product
-        -search product with name, manufacturer and/or category
+    /products:
+        -POST: create new product (name, manufacturer, category, description, price, image)
+        -GET: get all products
+        -/:id GET: get single product
+        -/:id PUT: modify product
+        -GET: search product with name, manufacturer and/or category
 */
 app.get('/', (req, res) => {
     res.send('API root');
