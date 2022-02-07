@@ -297,17 +297,7 @@ let users = [
     
 ]
 
-let invoices = [
-    {
-        id: "fe4w5f6e4w",
-        name: "Erska"
-    },
-    {
-        id: "f4e6w4g63",
-        name: "Jorma"
-    }
-
-]
+let invoices = [];
 
 app.use(express.json()); // replaces body parser in express 4.16 and later
 
@@ -341,7 +331,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/products/:id', (req, res) => {
-    const searchedProduct = products.find(p => p.id === req.params.id);
+    const searchedProduct = products.find(p => p.id.toString() === req.params.id);
     if (searchedProduct) {
         res.json(searchedProduct);
     }
@@ -375,7 +365,7 @@ app.post('/products', (req, res) => {
         imageUrl: req.body.imageUrl
     };
     products = products.concat(newProduct);
-    res.json(products.find(p => p.id === newProduct.id));
+    res.json(products.find(p => p.id.toString() === newProduct.id));
 })
 
 app.put('/products/:id', (req, res) => {
@@ -383,7 +373,7 @@ app.put('/products/:id', (req, res) => {
     if (updateProduct) {
         console.log()
         const updatedProduct = {...req.body, id: updateProduct.id}
-        products = products.map(p => p.id === updatedProduct.id ? updatedProduct : p);
+        products = products.map(p => p.id.toString() === updatedProduct.id ? updatedProduct : p);
         res.json(updatedProduct);
     }
     else {
@@ -403,7 +393,7 @@ app.post('/user', (req, res) => {
         phoneNumber: req.body.phoneNumber
     };
     users = users.concat(newUser);
-    res.json(users.find(p => p.id === newUser.id));
+    res.json(users.find(p => p.id.toString() === newUser.id));
 })
 
 app.get('/invoice', (req, res) => {
@@ -442,7 +432,7 @@ app.post('/purchase', (req, res) => {
         products: []
     }
     req.body.products.forEach(p => {
-        const newProduct = products.find(product => p.id === product.id.toString());
+        const newProduct = products.find(product => p.id.toString() === product.id.toString());
         if (newProduct) {
             newInvoice.products.push(newProduct);
         }
