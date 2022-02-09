@@ -1,0 +1,30 @@
+.Item {
+  width: 200px;
+}
+.Item .Img {
+  width: 150px;
+}
+.Item h1{
+  color: rgb(94, 65, 199);
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.Item h2 {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.Item h3 {
+  font-size: 12px;
+  margin: 0px;
+}
+.Item .Star {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-image: "/img/symbols.png";
+  background-size: 100% 100%;
+}
