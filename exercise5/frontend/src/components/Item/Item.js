@@ -1,14 +1,18 @@
 import React from 'react'
 import styles from './Item.module.css'
 
-const Item = ({ item }) => {
+const Item = ({ item, adminMode, deleteItem }) => {
+
+    const deleteThisItem = () => {
+        deleteItem(item.id);
+    } 
     return(
         <div className={styles.Item}>
             <img src={item.imageUrl} alt={item.name} className={styles.Img} />
             <h1>{item.name}</h1>
             <h2>By {item.manufacturer}</h2>
             <h2>{item.price.toFixed(2)}$</h2>
-            <h3>Stars: {item.stars} ^ {item.reviews}</h3>
+            { adminMode ? <button onClick={deleteThisItem}>Delete</button> : <></>}
         </div>
     )
 }

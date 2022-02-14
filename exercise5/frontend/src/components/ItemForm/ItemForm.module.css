@@ -1,0 +1,37 @@
+.ItemFormContainer {
+  background-color: rgb(94, 65, 199);
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.ItemForm {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ItemFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.ItemDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ItemDescription textarea {
+  height: 50%;
+  resize: none;
+}
+
+.ItemFields label {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
