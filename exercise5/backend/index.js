@@ -302,6 +302,7 @@ let invoices = [];
 
 app.use(cors());
 app.use(express.json()); // replaces body parser in express 4.16 and later
+app.use(express.static('build'));
 
 const info = `
 <div>
@@ -373,7 +374,6 @@ app.post('/products', (req, res) => {
 app.put('/products/:id', (req, res) => {
     const updateProduct = products.find(p => p.id.toString() === req.params.id);
     if (updateProduct) {
-        console.log()
         const updatedProduct = {...req.body, id: updateProduct.id}
         products = products.map(p => p.id.toString() === updatedProduct.id ? updatedProduct : p);
         res.json(updatedProduct);
@@ -382,6 +382,17 @@ app.put('/products/:id', (req, res) => {
         res.status(400).send({ error: 'Product not found'});
     }
 })
+
+app.delete('/products/:id', (req, res) => {
+    const deleteProduct = products.find(p => p.id.toString() === req.params.id);
+    if (deleteProduct) {
+        products = products.filter(p => p.id.toString() !== req.params.id)
+        res.json(deleteProduct);
+    }
+    else {
+        res.status(400).send({ error: 'Product not found'});
+    }
+});
 
 app.get('/user', (req, res) => {
     res.json(users);
