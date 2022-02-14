@@ -328,7 +328,7 @@ const info = `
 </div>
 `
 
-app.get('/', (req, res) => {
+app.get('/info', (req, res) => {
     res.send(info);
 })
 
