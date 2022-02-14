@@ -302,6 +302,7 @@ let invoices = [];
 
 app.use(cors());
 app.use(express.json()); // replaces body parser in express 4.16 and later
+app.use(express.static('build'));
 
 const info = `
 <div>
