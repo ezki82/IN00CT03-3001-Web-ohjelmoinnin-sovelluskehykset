@@ -1,5 +1,8 @@
 .App {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+}
+
+.AdminButton {
+    background-color: rgb(176, 91, 255);
 }

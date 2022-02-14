@@ -1,0 +1,26 @@
+.ItemForm {
+  background-color: rgb(94, 65, 199);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ItemFields {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 10px;
+}
+
+.ItemField {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TextArea {
+  display: flex;
+  flex-direction: column;
+}
