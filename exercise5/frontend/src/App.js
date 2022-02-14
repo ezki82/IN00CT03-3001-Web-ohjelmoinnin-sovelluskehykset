@@ -32,6 +32,11 @@ const App = () => {
     setItems(items.filter(i => i.id !== response.data.id))
   }
 
+  const handleCreateItem = async (item) => {
+    const response = await axios.post(`http://localhost:3001/products`, item);
+    setItems(items.concat(response.data));
+  }
+
   const filteredItems = searchPhrase.length !== 0 ? items.filter(i => {
     const searchString = i.name + i.manufacturer + i.description + i.category;
     return searchString.toLowerCase().includes(searchPhrase)
@@ -41,7 +46,7 @@ const App = () => {
   <div className={styles.App}>
     <button onClick={handleAdminModeChange} className={styles.AdminButton}>{adminMode ? "Toggle Admin Mode OFF" : "Toggle Admin Mode ON"}</button>
     <Searchbar searchOnChange={searchOnChange}/>
-    {adminMode ? <ItemForm /> : <></>}
+    {adminMode ? <ItemForm createItem={handleCreateItem}/> : <></>}
     <Itemcontainer items={filteredItems} adminMode={adminMode} deleteItem={handleDeleteItem}/>
   </div>
   );
