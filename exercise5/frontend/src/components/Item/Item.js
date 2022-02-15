@@ -4,7 +4,7 @@ import styles from './Item.module.css'
 const Item = ({ item, adminMode, deleteItem }) => {
 
     const deleteThisItem = () => {
-        deleteItem(item.id);
+        deleteItem(item);
     } 
     return(
         <div className={styles.Item}>

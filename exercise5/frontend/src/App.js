@@ -27,8 +27,11 @@ const App = () => {
     setSearchPhrase(phrase);
   }
 
-  const handleDeleteItem = async (id) => {
-    const response = await axios.delete(`http://localhost:3001/products/${id}`);
+  const handleDeleteItem = async (item) => {
+    if (!window.confirm(`Are you sure you want to delete ${item.name}`)) {
+      return;
+    } 
+    const response = await axios.delete(`http://localhost:3001/products/${item.id}`);
     setItems(items.filter(i => i.id !== response.data.id))
   }
 
