@@ -12,6 +12,7 @@ const Item = ({ item, adminMode, deleteItem }) => {
             <h1>{item.name}</h1>
             <h2>By {item.manufacturer}</h2>
             <h2>{item.price.toFixed(2)}$</h2>
+            <p>{item.description}</p>
             { adminMode ? <button onClick={deleteThisItem}>Delete</button> : <></>}
         </div>
     )
